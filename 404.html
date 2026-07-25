@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>vilan moved</title>
+    <meta name="robots" content="noindex">
+    <!-- The vilan book moved to vilan-lang.github.io/vilan when the repo
+         transferred to the vilan-lang org (proposal/org-migration.md §3).
+         Released binaries through v0.14.0 deep-link the old URL from editor
+         hovers, so this page must keep answering indefinitely: it forwards
+         any /vilan/* path — fragment included — to the same page at the new
+         home. Anything outside /vilan/* gets the plain link instead. -->
+    <script>
+        if (location.pathname.indexOf('/vilan') === 0) {
+            location.replace('https://vilan-lang.github.io'
+                + location.pathname + location.search + location.hash);
+        }
+    </script>
+</head>
+<body>
+    <p>The vilan book lives at
+       <a href="https://vilan-lang.github.io/vilan/">vilan-lang.github.io/vilan</a>.
+    </p>
+</body>
+</html>
