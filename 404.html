@@ -4,22 +4,45 @@
     <meta charset="utf-8">
     <title>vilan moved</title>
     <meta name="robots" content="noindex">
-    <!-- The vilan book moved to vilan-lang.github.io/vilan when the repo
-         transferred to the vilan-lang org (proposal/org-migration.md §3).
-         Released binaries through v0.14.0 deep-link the old URL from editor
-         hovers, so this page must keep answering indefinitely: it forwards
-         any /vilan/* path — fragment included — to the same page at the new
-         home. Anything outside /vilan/* gets the plain link instead. -->
+    <!-- The vilan book moved off this account when the repo transferred to the
+         vilan-lang org (proposal/org-migration.md §3). Released binaries
+         through v0.14.0 deep-link the OLD url from editor hovers, so this page
+         must keep answering indefinitely: it forwards any /vilan/* path —
+         query and fragment included — to the same page at the book's current
+         home. Anything outside /vilan/* gets the plain link instead.
+
+         The book has now moved TWICE. It went first to
+         vilan-lang.github.io/vilan and then to vilan-lang.org/docs, and this
+         page was not updated the second time — so from that move until
+         2026-07-29 every old hover link landed on a 404, which is the one
+         thing this page exists to prevent. Two consequences worth keeping:
+
+         The path is REWRITTEN, not passed through. /vilan/<rest> maps to
+         /docs/<rest> because the book no longer lives under a /vilan prefix;
+         copying the pathname verbatim is what the previous version did and it
+         only worked while both hosts happened to agree on the prefix.
+
+         The target is the apex domain, not vilan-lang.github.io. That host
+         301s to vilan-lang.org anyway, so pointing at it just adds a hop that
+         can rot independently — as it did.
+
+         NOTHING TESTS THIS. It is a static page in a repo with no CI, aimed at
+         a host it does not control. If the book ever moves again, this file is
+         the thing that silently stops working; check it by hand. -->
     <script>
-        if (location.pathname.indexOf('/vilan') === 0) {
-            location.replace('https://vilan-lang.github.io'
-                + location.pathname + location.search + location.hash);
+        var path = location.pathname;
+        // `=== '/vilan'` and the trailing slash are both needed: a bare
+        // indexOf('/vilan') prefix test also matches /vilanfoo, which the
+        // slice below would rewrite into a nonsense /docsfoo.
+        if (path === '/vilan' || path.indexOf('/vilan/') === 0) {
+            location.replace('https://vilan-lang.org/docs'
+                + path.slice('/vilan'.length) + location.search + location.hash);
         }
     </script>
 </head>
 <body>
     <p>The vilan book lives at
-       <a href="https://vilan-lang.github.io/vilan/">vilan-lang.github.io/vilan</a>.
+       <a href="https://vilan-lang.org/docs/">vilan-lang.org/docs</a>.
     </p>
 </body>
 </html>
